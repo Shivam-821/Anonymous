@@ -129,36 +129,6 @@ The application includes various API endpoints for:
 - User authentication (`/api/auth/`)
 - Message handling (`/api/messages/`)
 - User management (`/api/users/`)
-- Real-time communication
-
-## 🤝 Contributing
-
-We welcome contributions to the Anonymous platform! Here's how you can help:
-
-1. **Fork the repository**
-2. **Create your feature branch**
-   ```bash
-   git checkout -b feature/AmazingFeature
-   ```
-3. **Commit your changes**
-   ```bash
-   git commit -m 'Add some AmazingFeature'
-   ```
-4. **Push to the branch**
-   ```bash
-   git push origin feature/AmazingFeature
-   ```
-5. **Open a Pull Request**
-
-### Development Guidelines
-
-- Follow the existing code style and conventions
-- Write clear, descriptive commit messages
-- Add tests for new features when applicable
-- Update documentation as needed
-- Ensure your code passes all linting checks
-
-## 🐛 Bug Reports & Feature Requests
 
 If you encounter any bugs or have feature requests, please:
 
@@ -206,7 +176,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Shivam**
+**Shivam Raj**
 - GitHub: [@Shivam-821](https://github.com/Shivam-821)
 - Project Link: [https://github.com/Shivam-821/Anonymous](https://github.com/Shivam-821/Anonymous)
 
