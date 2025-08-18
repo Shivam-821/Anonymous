@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/dbConfig";
 import UserModel from "@/model/user.model";
 
-export async function GET(request: Request) {
+export async function GET(request: Response) {
   await dbConnect();
 
   try {
@@ -20,6 +20,7 @@ export async function GET(request: Request) {
         },
       },
     ]);
+    console.log(randomMessages)
 
     return NextResponse.json({
       success: true,
