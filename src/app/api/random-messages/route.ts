@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/dbConfig";
 import UserModel from "@/model/user.model";
 
-export async function GET(request: Response) {
+export async function GET(request: Request) {
   await dbConnect();
 
   try {
