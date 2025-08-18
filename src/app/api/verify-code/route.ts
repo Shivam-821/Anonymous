@@ -22,7 +22,11 @@ export async function POST(request: Request) {
     }
 
     const isCodeValid = user.verifyCode === code;
-    const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
+    let isCodeNotExpired;
+    if (user.verifyCodeExpiry) {
+       isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
+    }
+    
 
     if (isCodeValid && isCodeNotExpired) {
       user.isVerified = true;
