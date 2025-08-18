@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   request: Request,
-  context: { params: { messageid: string } }
+  context: any
 ) {
   const { messageid } = await context.params;
 

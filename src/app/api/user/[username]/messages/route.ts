@@ -4,7 +4,7 @@ import UserModel from "@/model/user.model";
 
 export async function GET(
   req: Request,
-  context: { params: { username: string } }
+  context: any
 ) {
   await dbConnect();
 

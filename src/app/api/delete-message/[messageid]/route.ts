@@ -3,8 +3,8 @@ import { getServerSession, User } from "next-auth";
 import UserModel from "@/model/user.model";
 import { authOptions } from "../../auth/[...nextauth]/options";
 
-export async function DELETE(request: Request, context: { params: { messageid: string } }){
-    const { messageid } = await context.params;
+export async function DELETE(request: Request, context: any){
+    const { messageid } =  context.params;
     await dbConnect()
 
     const session = await getServerSession(authOptions)
@@ -32,7 +32,7 @@ export async function DELETE(request: Request, context: { params: { messageid: s
         return Response.json({
             success: true,
             message: "Message Deleted"
-        }, {status: 201})
+        }, {status: 200})
     } catch (error) {
         console.log("Error in deleting message route: ", error)
         return Response.json({
