@@ -4,11 +4,11 @@ import UserModel from "@/model/user.model";
 
 export async function GET(
   req: Request,
-  { params }: { params: { username: string } }
+  { params }: { params: Promise<{ username: string }> }
 ) {
   await dbConnect();
 
-  const username = await params.username;
+  const username = await params;
 
   const { searchParams } = new URL(req.url);
   const page = parseInt(searchParams.get("page") || "1", 10);

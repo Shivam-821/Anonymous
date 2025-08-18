@@ -3,8 +3,8 @@ import UserModel from "@/model/user.model";
 import { getServerSession, User } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
-export async function POST(request: Request, { params }: { params: { messageid: string } }) {
-  const messageId = await params.messageid;
+export async function POST(request: Request, { params }: { params: Promise<{ messageid: string }> }) {
+  const messageId = await params;
 
   try {
     await dbConnect();
