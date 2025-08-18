@@ -6,9 +6,9 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   request: Request,
-  { params }: { params: { messageid: string } }
+  context: { params: { messageid: string } }
 ) {
-  const { messageid } = params;
+  const { messageid } = await context.params;
 
   try {
     await dbConnect();
