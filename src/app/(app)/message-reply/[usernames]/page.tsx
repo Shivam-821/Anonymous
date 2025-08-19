@@ -14,12 +14,22 @@ function MessageReplyPage() {
   const [allMessages, setAllMessages] = useState<Message[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [owner, setOwner] = useState<boolean>(false);
   const router = useRouter();
 
-  const { data: session } = useSession();
-  const loggedInUsername = session?.user?.name;
-  const owner = loggedInUsername === usernames;
+  const { data: session, status } = useSession();
+  const loggedInUsername = session?.user?.username;
 
+  useEffect(() => {
+    console.log("my: ", loggedInUsername)
+    console.log("U: ", usernames)
+    if (loggedInUsername && loggedInUsername === usernames) {
+      setOwner(true);
+    } else {
+      setOwner(false);
+    }
+  }, [loggedInUsername, usernames]);
+  
   useEffect(() => {
     const getAllMessage = async () => {
       try {
@@ -36,6 +46,12 @@ function MessageReplyPage() {
 
     if (usernames) getAllMessage();
   }, [usernames, page]);
+
+  if (status === "loading") {
+    return (
+      <p className="w-full min-h-screen flex justify-center">Loading...</p>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen gap-2 px-8 pt-3">
@@ -72,9 +88,13 @@ function MessageReplyPage() {
               <CardContent>
                 <p>📩 {msg.content}</p>
                 {msg.reply ? (
-                  <p className="text-green-600 font-medium mt-2">💬 {msg.reply}</p>
+                  <p className="text-green-600 font-medium mt-2">
+                    💬 {msg.reply}
+                  </p>
                 ) : (
-                  <p className="text-gray-500 mt-2 italic">⏳ No reply yet...</p>
+                  <p className="text-gray-500 mt-2 italic">
+                    ⏳ No reply yet...
+                  </p>
                 )}
               </CardContent>
             </Card>
@@ -102,7 +122,10 @@ function MessageReplyPage() {
           </div>
         </>
       ) : (
-        <TextHoverEffect text="No Messages To Display" className="w-full h-full" />
+        <TextHoverEffect
+          text="No Messages To Display"
+          className="w-full h-full"
+        />
       )}
     </div>
   );

@@ -25,8 +25,8 @@ const SignInPage = () => {
   const [isvalid, setIsValid] = useState(true)
   const [email, setEmail] = useState("")
   const [buttonNotDisable, setButtonNotDisable] = useState(true)
+  const [display, setDisplay] = useState<boolean>(false)
   const router = useRouter();
-  let display: boolean = false;
 
   const debounced = useDebounceCallback(setUsername, 300); // not want to call api on every keystroke(onKeyDown)
 
@@ -151,7 +151,7 @@ const SignInPage = () => {
           </div>
         </div>
       ))
-      display = true;
+      setDisplay(true)
     }
     }, [])
   

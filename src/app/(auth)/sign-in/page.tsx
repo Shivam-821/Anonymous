@@ -26,8 +26,9 @@ import { Loader2 } from "lucide-react";
 const SignInPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [buttonNotDisable, setButtonNotDisable] = useState(true);
+  const [display, setDisplay] = useState<boolean>(false)
   const router = useRouter();
-  let display: boolean = false;
+  
 
   const form = useForm<z.infer<typeof singInSchema>>({
     resolver: zodResolver(singInSchema),
@@ -111,7 +112,7 @@ const SignInPage = () => {
     </div>
         </div>
       ))
-      display = true;
+      setDisplay(true)
     }
   }, [])
 
