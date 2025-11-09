@@ -55,7 +55,7 @@ function Messageage() {
       if (response?.data.success) {
       }
     } catch (error) {
-      // console.log("Error sending message: ", error);
+      console.log("Error sending message: ", error);
     } finally {
       setSending(false);
     }

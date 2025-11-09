@@ -10,7 +10,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { User_Username } from "@/app/api/all-users/route";
 import { useRouter } from "next/navigation";
 import { LoaderIcon, MessageSquare, Ghost } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton"; 
 
 const CARDS = [
   {
