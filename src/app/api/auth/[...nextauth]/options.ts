@@ -97,6 +97,7 @@ export const authOptions: NextAuthOptions = {
       }
       return true;
     },
+    
 
     async jwt({ token, user, account, profile }) {
       await dbConnect();
