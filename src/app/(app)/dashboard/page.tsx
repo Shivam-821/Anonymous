@@ -79,7 +79,7 @@ function DashboardPage() {
 
       try {
         const response = await axios.get("/api/get-messages");
-        console.log(response.data.messages);
+        // console.log(response.data.messages);
         setMessages(response?.data.messages || []);
         toast.success("Showing latest messages", {
           style: {

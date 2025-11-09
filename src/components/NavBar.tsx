@@ -19,8 +19,8 @@ function NavBarContent() {
           className="pl-2"
           src="/anonymousLogo.png"
           alt="Anonymous Message"
-          width={90}
-          height={42}
+          width={84}
+          height={40}
           priority
           onClick={() => router.push('/')}
         />

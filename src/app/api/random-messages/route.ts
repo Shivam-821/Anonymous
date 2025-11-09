@@ -20,7 +20,6 @@ export async function GET(request: Request) {
         },
       },
     ]);
-    console.log(randomMessages)
 
     return NextResponse.json({
       success: true,

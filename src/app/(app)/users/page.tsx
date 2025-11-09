@@ -135,7 +135,7 @@ function UserPage() {
         setIsLoading(true);
         setIsMessagesLoading(true);
 
-        const [messagesResponse, usersResponse] = await Promise.all([
+        const [messagesResponse, usersResponse] = await axios.all([
           axios.get<ApiResponse>("/api/random-messages"),
           axios.get<ApiResponse>("/api/all-users"),
         ]);
@@ -167,44 +167,12 @@ function UserPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen w-full overflow-x-hidden bg-slate-100 dark:bg-black text-gray-800 dark:text-white">
-        <div className="max-w-screen-xl mx-auto px-4 py-6">
-          {/* Header Skeleton */}
-          <div className="flex flex-col md:flex-row md:justify-between gap-4 mb-6">
-            <div className="space-y-2">
-              <Skeleton className="h-8 w-64" />
-              <Skeleton className="h-4 w-48" />
-            </div>
-            <Skeleton className="h-10 w-full md:w-1/2 lg:w-1/3" />
-          </div>
-
-          {/* Grid Skeleton */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-4 gap-5">
-            {/* Card Stack Skeleton */}
-            <div className="row-span-2">
-              <Skeleton className="h-[500px] w-full rounded-lg" />
-            </div>
-
-            {/* Random Messages Skeleton */}
-            <div className="col-span-1 lg:col-span-2 row-span-2 space-y-4">
-              {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className="h-24 w-full rounded-lg" />
-              ))}
-            </div>
-
-            {/* Tooltip Section Skeleton */}
-            <div className="col-span-1 lg:col-span-3 space-y-4">
-              <Skeleton className="h-6 w-3/4" />
-              <div className="flex justify-center">
-                <Skeleton className="h-32 w-full rounded-lg" />
-              </div>
-            </div>
-
-            {/* Infinite Moving Cards Skeleton */}
-            <div className="col-span-1 lg:col-span-3">
-              <Skeleton className="h-32 w-full rounded-lg" />
-            </div>
-          </div>
+      <div className="min-h-screen w-full flex text-black justify-center gap-5">
+        <div className="w-60 h-60 md:w-80 bg-gray-300/40 rounded-xl animate-pulse mt-50 border-t-8 border-gray-300/60"></div>
+        <div className="h-[550px] w-[680px] bg-gray-300/50 rounded-xl animate-pulse mt-5">
+          <div className="w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
+          <div className="w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
+          <div className="w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
         </div>
       </div>
     );
@@ -251,9 +219,9 @@ function UserPage() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-4 gap-5 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-4 gap-3 mt-6">
           {/* Card Stack */}
-          <div className="row-span-2 flex justify-center items-center">
+          <div className="row-span-2 flex py-1 justify-center md:justify-start items-center">
             <CardStack items={CARDS} />
           </div>
 

@@ -23,7 +23,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const userId = new mongoose.Types.ObjectId(user._id); // while performing aggregation if id is in string form then error will occur.
+  const userId = new mongoose.Types.ObjectId(user._id);
 
   try {
     const userAggre = await UserModel.aggregate([

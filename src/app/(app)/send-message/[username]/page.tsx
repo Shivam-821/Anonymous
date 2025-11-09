@@ -27,7 +27,6 @@ import { useDebounceCallback } from "usehooks-ts";
 
 function Messageage() {
   const params = useParams<{ username: string }>();
-  console.log(params);
   const [sending, setSending] = useState(false);
   const [writtenContent, setWrittenContent] = useState("")
   const [suggestions, setSuggestions] = useState([])
@@ -56,7 +55,7 @@ function Messageage() {
       if (response?.data.success) {
       }
     } catch (error) {
-      console.log("Error sending message: ", error);
+      // console.log("Error sending message: ", error);
     } finally {
       setSending(false);
     }

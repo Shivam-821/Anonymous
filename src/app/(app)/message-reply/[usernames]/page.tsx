@@ -21,8 +21,6 @@ function MessageReplyPage() {
   const loggedInUsername = session?.user?.username;
 
   useEffect(() => {
-    console.log("my: ", loggedInUsername)
-    console.log("U: ", usernames)
     if (loggedInUsername && loggedInUsername === usernames) {
       setOwner(true);
     } else {
