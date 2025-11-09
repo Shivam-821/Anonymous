@@ -197,16 +197,26 @@ function DashboardPage() {
 
   if (!session || !session.user) {
     return (
-      <div className="w-screen min-h-screen p-10 bg-white relative">
-        <Skeleton className="h-[120px] w-[240px] rounded-xl absolute top-10 left-10 bg-gradient-to-r from-neutral-200 to-neutral-300 animate-pulse" />
-        <Skeleton className="h-[120px] w-[240px] rounded-xl absolute top-10 right-10 bg-gradient-to-r from-neutral-200 to-neutral-300 animate-pulse" />
-        <Skeleton className="h-[120px] w-[240px] rounded-xl absolute bottom-10 left-10 bg-gradient-to-r from-neutral-200 to-neutral-300 animate-pulse" />
-        <Skeleton className="h-[120px] w-[240px] rounded-xl absolute bottom-10 right-10 bg-gradient-to-r from-neutral-200 to-neutral-300 animate-pulse" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Skeleton
-            className="h-[150px] w-[150px] rounded-full bg-gradient-to-r from-neutral-600 to-white animate-spin"
-            style={{ animationDuration: "3s" }}
-          />
+      <div className="w-screen min-h-screen p-6 bg-white relative">
+        <div className="flex flex-col md:flex-row justify-between pr-14 pl-2">
+          <div className="flex flex-col gap-3 rounded-lg">
+            <div className="w-66 h-14 bg-gray-300/50 animate-pulse rounded-lg"></div>
+            <div className="w-45 h-8 bg-gray-300/40 animate-pulse rounded-lg"></div>
+            <div className="w-20 h-10 bg-gray-300/40 animate-pulse rounded-lg border-2 border-gray-300/60"></div>
+          </div>
+          <div className="w-28 h-28 rounded-full bg-gray-300/50 animate-pulse mr-3"></div>
+        </div>
+        <div className="mt-5 ">
+          <div className="w-40 h-8 bg-gray-300/60 animate-pulse rounded-md px-5"></div>
+          <div className="flex justify-between pr-2 items-center gap-3 mt-5">
+            <div className="w-full h-10 py-1 bg-gray-300/40 rounded-lg animate-pulse"></div>
+            <div className="w-15 h-7 bg-gray-300/40 animate-pulse rounded-lg"></div>
+          </div>
+          <div className="mt-5 flex gap-5 items-center">
+            <div className="w-10 h-[21px] bg-gray-300/50 rounded-lg animate-pulse"></div>
+            <div className="w-40 h-9 bg-gray-300/40 rounded-lg animate-pulse"></div>
+          </div>
+          <div className="w-full h-[1px] mt-5 bg-gray-300 animate-pulse"></div>
         </div>
       </div>
     );

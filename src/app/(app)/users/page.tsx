@@ -166,12 +166,12 @@ function UserPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen w-full flex text-black justify-center gap-5">
-        <div className="w-60 h-60 md:w-80 bg-gray-300/40 rounded-xl animate-pulse mt-50 border-t-8 border-gray-300/60"></div>
-        <div className="h-[550px] w-[680px] bg-gray-300/50 rounded-xl animate-pulse mt-5">
-          <div className="w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
-          <div className="w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
-          <div className="w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
+      <div className="min-h-screen w-full flex flex-col md:flex-row items-center text-black justify-center gap-5">
+        <div className="w-60 h-60 md:w-80 bg-gray-300/40 rounded-xl animate-pulse mt-50 border-t-8 border-gray-300/60 "></div>
+        <div className="h-[650px] w-[390px] md:w-[680px] bg-gray-300/50 rounded-xl animate-pulse mt-5">
+          <div className="w-[320px] md:w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
+          <div className="w-[320px] md:w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
+          <div className="w-[320px] md:w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
         </div>
       </div>
     );

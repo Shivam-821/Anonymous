@@ -132,9 +132,14 @@ export default function HomePage() {
 
   if (!isMounted) {
     return (
-      <main className="min-h-screen bg-slate-100 dark:bg-black">
-        <div className="h-screen flex items-center justify-center">
-          <div className="animate-pulse">Loading...</div>
+      <main className="min-h-screen bg-slate-100 dark:bg-black flex flex-col items-center justify-center">
+        <div className="flex flex-col gap-6">
+          <div className="w-140 h-18 bg-gray-300/50 animate-pulse rounded-md"></div>
+          <div className="ml-17 w-100 h-8 bg-gray-300/40 animate-pulse rounded-md"></div>
+        </div>
+        <div className="flex gap-3 mt-10">
+          <div className="w-30 h-14 animate-pulse rounded-3xl bg-gray-300/40"></div>
+          <div className="w-50 h-14 animate-pulse rounded-3xl bg-gray-300/40"></div>
         </div>
       </main>
     );

@@ -100,7 +100,7 @@ const SignInPage = () => {
   
       try {
         const response = await signupPromise;
-        console.log(response)
+        // console.log(response)
         if(response.data.success){
           router.replace(`/verify/${username}`)
         }
