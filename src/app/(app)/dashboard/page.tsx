@@ -227,7 +227,7 @@ function DashboardPage() {
   const profileUrl = `${baseUrl}/send-message/${username}`;
 
   return (
-    <div className="my-3 lg:my-1 mx-5 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
+    <div className="my-3 lg:my-1 p-7 pt-5 bg-white rounded w-full max-w-6xl">
       <Toaster position="bottom-right" reverseOrder={false} />
       <div className="flex flex-col md:flex-row justify-between pt-3 gap-6">
         <div className="flex-1 w-full">

@@ -13,13 +13,13 @@ function NavBarContent() {
   const router = useRouter();
 
   return (
-    <nav className="shadow-md shadow-gray-300 w-full overflow-x-hidden">
+    <nav className="shadow-md shadow-gray-200 w-full overflow-x-hidden">
       <div className="max-w-screen-xl mx-auto px-4 flex justify-between items-center">
         <Image
           className="pl-2"
           src="/anonymousLogo.png"
           alt="Anonymous Message"
-          width={84}
+          width={80}
           height={40}
           priority
           onClick={() => router.push('/')}
