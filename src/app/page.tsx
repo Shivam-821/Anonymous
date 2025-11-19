@@ -432,7 +432,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold mb-3">Connect With Others</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Browse through members and find people you'd like to send
+                Browse through members and find people you&apos;d like to send
                 messages anonymously.
               </p>
             </motion.div>
@@ -468,8 +468,8 @@ export default function HomePage() {
                 Send Without an Account
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                To send anonymous messages, you don't need to sign in or create
-                an account — just type and send.
+                To send anonymous messages, you don&apos;t need to sign in or
+                create an account — just type and send.
               </p>
             </motion.div>
 
@@ -485,8 +485,8 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold mb-3">Stay Fully Anonymous</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                We never store the sender's identity. Your privacy and anonymity
-                are always protected.
+                We never store the sender&apos;s identity. Your privacy and
+                anonymity are always protected.
               </p>
             </motion.div>
 
