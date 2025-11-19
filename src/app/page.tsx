@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
@@ -109,9 +109,8 @@ const TESTIMONIALS = [
 export default function HomePage() {
   const [isMounted, setIsMounted] = useState(false);
   const { data: session, status } = useSession();
-  const [isDashboardOptionOpen, setIsDashboardOptionOpen] = useState(false)
-  const dropdownRef = React.useRef(null);
-
+  const [isDashboardOptionOpen, setIsDashboardOptionOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -123,7 +122,6 @@ export default function HomePage() {
       });
     };
 
-
     const timer = setTimeout(() => {
       cleanup();
     }, 100);
@@ -131,6 +129,27 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDashboardOptionOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Close dropdown when clicking on a link inside it
+  const handleLinkClick = () => {
+    setIsDashboardOptionOpen(false);
+  };
 
   if (!isMounted) {
     return (
@@ -150,7 +169,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-100 dark:bg-black text-gray-900 dark:text-white flex flex-col">
       {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center text-center px-4 py-20 overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center text-center px-4 py-19 overflow-hidden">
         {/* Animated Gradient Blobs */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute -top-40 -left-40 w-96 h-96 bg-indigo-500/20 dark:bg-indigo-500/10 blur-[120px] animate-pulse"></div>
@@ -187,27 +206,53 @@ export default function HomePage() {
           >
             {session ? (
               <>
-                <div
-                  onClick={() => setIsDashboardOptionOpen((prev) => !prev)}
-                  className="relative inline-block bg-slate-700/90 hover:bg-slate-700 text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform backdrop-blur-md shadow-lg cursor-pointer"
-                >
-                  <span>My Own</span>
+                <div ref={dropdownRef} className="relative inline-block">
+                  <div
+                    onClick={() => setIsDashboardOptionOpen((prev) => !prev)}
+                    className="relative inline-flex items-center gap-2 bg-slate-700/90 hover:bg-slate-700 text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform backdrop-blur-md shadow-lg cursor-pointer"
+                  >
+                    <span>My Own</span>
+                    <svg
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        isDashboardOptionOpen ? "rotate-180" : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
 
+                  {/* Dropdown Menu */}
                   {isDashboardOptionOpen && (
-                    <div className="absolute z-10 top-5 -left-50 bg-slate-200 dark:bg-neutral-700 rounded-xl shadow-xl text-slate-900 dark:text-white flex flex-col w-[200px] overflow-hidden backdrop-blur-md">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute z-50 -left-51 top-4 mt-2 bg-white dark:bg-neutral-800 rounded-xl shadow-xl border border-gray-200 dark:border-neutral-700 overflow-hidden min-w-[200px]"
+                    >
                       <Link
                         href="/dashboard"
-                        className="hover:bg-slate-300 dark:hover:bg-neutral-600 p-3 transition-all"
+                        onClick={handleLinkClick}
+                        className="block px-4 py-3 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-neutral-700 transition-colors duration-150 border-b border-gray-100 dark:border-neutral-600"
                       >
                         Go to Dashboard
                       </Link>
                       <Link
                         href={`/message-reply/${session?.user.username}`}
-                        className="hover:bg-slate-300 dark:hover:bg-neutral-600 p-3 transition-all"
+                        onClick={handleLinkClick}
+                        className="block px-4 py-3 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-neutral-700 transition-colors duration-150"
                       >
-                        My Reply
+                        My Replies
                       </Link>
-                    </div>
+                    </motion.div>
                   )}
                 </div>
 
@@ -240,15 +285,15 @@ export default function HomePage() {
 
         {/* FLOATING ANIMATION KEYFRAMES */}
         <style>{`
-    @keyframes float-slow {
-      0% { transform: translateY(0) translateX(0); opacity: 0.6; }
-      50% { transform: translateY(-20px) translateX(10px); opacity: 1; }
-      100% { transform: translateY(0) translateX(0); opacity: 0.6; }
-    }
-    .animate-float-slow {
-      animation: float-slow linear infinite;
-    }
-  `}</style>
+          @keyframes float-slow {
+            0% { transform: translateY(0) translateX(0); opacity: 0.6; }
+            50% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+            100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+          }
+          .animate-float-slow {
+            animation: float-slow linear infinite;
+          }
+        `}</style>
       </section>
 
       {/* Values Section (Replaces Stats Section) */}
@@ -423,7 +468,7 @@ export default function HomePage() {
                 Send Without an Account
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                To send anonymous messages, you don’t need to sign in or create
+                To send anonymous messages, you don't need to sign in or create
                 an account — just type and send.
               </p>
             </motion.div>
