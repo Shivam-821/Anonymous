@@ -22,7 +22,7 @@ function NavBarContent() {
           width={80}
           height={40}
           priority
-          onClick={() => router.push('/')}
+          onClick={() => router.push("/")}
         />
         <div className="flex items-center gap-4 mt-4 md:mt-0">
           {session?.user ? (
