@@ -21,7 +21,6 @@ function UserPage() {
   );
   const [isLoading, setIsLoading] = useState(true);
   const [isMessagesLoading, setIsMessagesLoading] = useState(true);
-  const [randomMessageLoading, setRandomMessageLoading] = useState(true);
 
   const router = useRouter();
 
