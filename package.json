@@ -37,6 +37,7 @@
     "react-email": "^4.0.16",
     "react-hook-form": "^7.58.1",
     "react-hot-toast": "^2.5.2",
+    "redis": "^5.10.0",
     "resend": "^4.6.0",
     "tailwind-merge": "^3.3.1",
     "usehooks-ts": "^3.1.1",

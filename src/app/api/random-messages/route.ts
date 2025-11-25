@@ -2,11 +2,23 @@
 import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/dbConfig";
 import UserModel from "@/model/user.model";
+import { redisClient } from "@/lib/redisConfig";
 
 export async function GET(request: Request) {
   await dbConnect();
 
+  const CACHE_EXPIRY = process.env.CACHE_EXPIRY;
   try {
+    if(redisClient.isReady){
+      const randomRedisMessages = await redisClient.get("randomMessages");
+      if (randomRedisMessages) {
+        console.log("randomRedisMessages: ", randomRedisMessages);
+        return NextResponse.json({
+          success: true,
+          messages: JSON.parse(randomRedisMessages as string),
+        });
+      }
+    }
     const randomMessages = await UserModel.aggregate([
       { $unwind: "$messages" },
       { $match: { "messages.reply": { $ne: "" } } },
@@ -21,6 +33,7 @@ export async function GET(request: Request) {
       },
     ]);
 
+    redisClient.set("randomMessages", JSON.stringify(randomMessages), { EX: parseInt(CACHE_EXPIRY) });
     return NextResponse.json({
       success: true,
       messages: randomMessages,
