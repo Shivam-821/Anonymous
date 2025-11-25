@@ -7,8 +7,8 @@ import { redisClient } from "@/lib/redisConfig";
 export async function GET(request: Request) {
   await dbConnect();
 
-  const CACHE_EXPIRY = process.env.CACHE_EXPIRY;
   try {
+    const CACHE_EXPIRY = process.env.CACHE_EXPIRY;
     if(redisClient.isReady){
       const randomRedisMessages = await redisClient.get("randomMessages");
       if (randomRedisMessages) {
@@ -33,7 +33,9 @@ export async function GET(request: Request) {
       },
     ]);
 
-    redisClient.set("randomMessages", JSON.stringify(randomMessages), { EX: parseInt(CACHE_EXPIRY) });
+    if(redisClient.isReady){
+      await redisClient.set("randomMessages", JSON.stringify(randomMessages), { EX: parseInt(CACHE_EXPIRY) });
+    }
     return NextResponse.json({
       success: true,
       messages: randomMessages,

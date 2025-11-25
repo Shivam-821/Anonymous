@@ -1,6 +1,6 @@
-import redis from 'redis'
+import { createClient } from 'redis'
 
-export const redisClient = redis.createClient({
+export const redisClient = createClient({
   password: process.env.REDIS_PASSWORD as string,
   socket: {
     host: process.env.REDIS_HOST,
