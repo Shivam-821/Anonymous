@@ -12,7 +12,6 @@ export async function GET(request: Request) {
     if(redisClient.isReady){
       const randomRedisMessages = await redisClient.get("randomMessages");
       if (randomRedisMessages) {
-        console.log("randomRedisMessages: ", randomRedisMessages);
         return NextResponse.json({
           success: true,
           messages: JSON.parse(randomRedisMessages as string),
