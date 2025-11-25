@@ -21,13 +21,14 @@ function UserPage() {
   );
   const [isLoading, setIsLoading] = useState(true);
   const [isMessagesLoading, setIsMessagesLoading] = useState(true);
+  const [randomMessageLoading, setRandomMessageLoading] = useState(true);
 
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
+        // setIsLoading(true);
         setIsMessagesLoading(true);
 
         const [messagesResponse, usersResponse] = await axios.all([
@@ -41,12 +42,16 @@ function UserPage() {
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false);
         setIsMessagesLoading(false);
       }
     };
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(false);
   }, []);
 
   const filterUser = (query: string) => {
@@ -64,7 +69,7 @@ function UserPage() {
     return (
       <div className="min-h-screen w-full flex flex-col md:flex-row items-center text-black justify-center gap-5">
         <div className="w-60 h-60 md:w-80 bg-gray-300/40 rounded-xl animate-pulse mt-50 border-t-8 border-gray-300/60 "></div>
-        <div className="h-[650px] w-[390px] md:w-[680px] bg-gray-300/50 rounded-xl animate-pulse mt-5">
+        <div className="h-[650px] w-[390px] md:w-[680px] bg-gray-300/50 rounded-xl animate-pulse mt-27 pt-10">
           <div className="w-[320px] md:w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
           <div className="w-[320px] md:w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
           <div className="w-[320px] md:w-[600px] h-[150px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
@@ -125,8 +130,11 @@ function UserPage() {
             <h2 className="text-xl font-semibold mb-4">Anonymous Thoughts</h2>
 
             {isMessagesLoading ? (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <LoaderIcon className="h-8 w-8 animate-spin" />
+              <div className="absolute inset-0 flex flex-col pt-10 items-center justify-center">
+                {/* <LoaderIcon className="h-8 w-8 animate-spin" /> */}
+                  <div className="w-[320px] md:w-[600px] h-[180px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
+                  <div className="w-[320px] md:w-[600px] h-[180px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
+                  <div className="w-[320px] md:w-[600px] h-[180px] bg-gray-300/80 rounded-xl animate-pulse m-10"></div>
               </div>
             ) : randomMessages.length > 0 ? (
               <div className="space-y-4">
