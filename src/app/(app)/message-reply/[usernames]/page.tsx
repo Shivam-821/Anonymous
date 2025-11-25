@@ -15,6 +15,7 @@ function MessageReplyPage() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [owner, setOwner] = useState<boolean>(false);
+  const [isMessagesLoading, setIsMessagesLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const { data: session, status } = useSession();
@@ -27,9 +28,10 @@ function MessageReplyPage() {
       setOwner(false);
     }
   }, [loggedInUsername, usernames]);
-  
+
   useEffect(() => {
     const getAllMessage = async () => {
+      setIsMessagesLoading(true);
       try {
         const response = await axios.get<ApiResponse>(
           `/api/user/${usernames}/messages?page=${page}&limit=5`
@@ -39,6 +41,8 @@ function MessageReplyPage() {
         setTotalPages(response.data?.totalPages || 1);
       } catch (error) {
         console.error("Failed to fetch messages", error);
+      } finally {
+        setIsMessagesLoading(false);
       }
     };
 
@@ -47,7 +51,15 @@ function MessageReplyPage() {
 
   if (status === "loading") {
     return (
-      <p className="w-full min-h-screen flex justify-center">Loading...</p>
+      <div className="min-h-screen flex flex-col gap-5 p-6">
+        <div className="h-[40px] w-full flex justify-between">
+          <div className="h-[30px] bg-gray-300/70 animate-pulse"></div>
+          <div className="h-[30px] bg-gray-300/70 animate-pulse"></div>
+        </div>
+        <div className="h-[120px] w-full bg-gray-300/60 animate-pulse rounded-lg"></div>
+        <div className="h-[120px] w-full bg-gray-300/60 animate-pulse rounded-lg"></div>
+        <div className="h-[120px] w-full bg-gray-300/60 animate-pulse rounded-lg"></div>
+      </div>
     );
   }
 
@@ -76,7 +88,13 @@ function MessageReplyPage() {
         )}
       </div>
 
-      {allMessages.length > 0 ? (
+      {isMessagesLoading ? (
+        <div className="min-h-screen flex flex-col gap-5 p-6">
+          <div className="h-[120px] w-full bg-gray-300/60 animate-pulse rounded-lg"></div>
+          <div className="h-[120px] w-full bg-gray-300/60 animate-pulse rounded-lg"></div>
+          <div className="h-[120px] w-full bg-gray-300/60 animate-pulse rounded-lg"></div>
+        </div>
+      ) : allMessages.length > 0 ? (
         <>
           {allMessages.map((msg, index) => (
             <Card
